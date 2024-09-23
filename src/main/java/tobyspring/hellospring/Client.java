@@ -12,6 +12,11 @@ public class Client {
         BeanFactory beanFactory = new AnnotationConfigApplicationContext(ObjectFactory.class);
         PaymentService paymentService = beanFactory.getBean(PaymentService.class);
 
+        ObjectFactory bean = beanFactory.getBean(ObjectFactory.class);
+        PaymentService paymentService1 = bean.paymentService();
+        PaymentService paymentService2 = bean.paymentService();
+        System.out.println(paymentService1 == paymentService2);
+
         Payment payment = paymentService.prepare(100L, "USD", BigDecimal.valueOf(50.7));
         System.out.println(payment);
     }
